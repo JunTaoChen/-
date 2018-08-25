@@ -104,23 +104,18 @@
 	(function() {
   "use strict";
 
-  var canvas, ctx, mouse, originx, originy, lifeVal, windVal, turbVal, int;
+  var canvas, ctx, mouse, originx, originy, lifeVal, windVal, turbVal, int,bx,by,isReady;
   var points = []; //Stores each generated particle
   var life = 20; //The length of the flame
   var wind = 0;
   var turb = 2;
-
+isReady = false;
   function init() {
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
     resizeCanvas();
     int = setInterval(pointFun, 25);
-    window.addEventListener("resize", resizeCanvas, false);
-    canvas.addEventListener("mousemove", function(evt) {
-      mouse = getMousePos(canvas, evt);
-      originx = mouse.x;
-      originy = mouse.y;
-    });
+    isReady = true;
   }
   //Particle constructor
   function point() {
@@ -221,6 +216,8 @@
     canvas.height = window.innerHeight;
     originx = canvas.width / 2;
     originy = canvas.height / 2;
+    bx = originx;
+    by = originy;
     pointFun();
   }
   //Execute when DOM has loaded
@@ -228,6 +225,16 @@
   	document.getElementsByTagName("body")[0].className = "active";
   	setTimeout(init,7000);
   }, false);
+  window.addEventListener('deviceorientation', function (event) {
+	    var alpha = Math.round(event.alpha),
+	        beta = Math.round(event.beta),
+	        gamma = Math.round(event.gamma);
+	    if(isReady){
+	    	originx = bx+(gamma*3);
+      		originy = by+(beta*3);
+	    }
+
+	}, false);
 })();
 </script>
 </html>
