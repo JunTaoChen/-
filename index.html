@@ -1,12 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>祝你身体健康 春节快乐</title>
+    <link rel="stylesheet" href="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/style.css?1">
+    <style>
+        .pre {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 12;
+            right: 0;
+            bottom: 0;
+        }
+
+        .button1 {
+            background-color: #1890ff;
+            border-color: #1890ff;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+            height: 40px;
+            padding: 0 15px;
+            font-size: 16px;
+            border-radius: 4px;
+            line-height: 40px;
+            position: relative;
+            font-weight: 400;
+            white-space: nowrap;
+            text-align: center;
+            background-image: none;
+            color: #fff;
+            margin: 50% auto 0;
+            width: 50%;
+        }
+
+        .button2 {
+            font-size: 16px;
+            color: #999;
+            padding: 15px;
+            width: 50%;
+            margin: 10px auto;
+            text-align: center;
+        }
+    </style>
 </head>
-<body>
-    
+
+<body onload="init()">
+    <div id="all">
+        <div class="bg1"></div>
+        <div class="bg2 lazy" data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/bg1.png">
+        </div>
+        <div class="main">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/decoration1.png" class="lazy decoration1">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/decoration2.png" class="lazy decoration2">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/decoration3.png" class="lazy decoration3">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/decoration4.png" class="lazy decoration4">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/fu1.png" class="lazy fu fu1">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/fu6.png" class="lazy fu-s fu6">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/fu5.png" class="lazy fu-s fu5">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/fu4.png" class="lazy fu fu4">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/flower.png" class="lazy fu flower">
+            <img data-src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/moust.png" class="lazy moust">
+        </div>
+    </div>
+    <div class="load-wrapp " id="loading" style="z-index: 11">
+        <div class="load-3">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <div id="pre" class="pre">
+        <div class="button1" onclick="play()">有声播放♪</div>
+        <div class="button2" onclick="play1()">静音播放</div>
+    </div>
+    <audio src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/bg.mp3" class="audio" id="audio" loop></audio>
 </body>
+<script src="https://jtchen666.oss-cn-hangzhou.aliyuncs.com/fs/lazyload.min.js"></script>
+<script>
+    function $(id) {
+        return document.getElementById(id)
+    }
+
+    function play() {
+        $("pre").style.display = "none";
+        $("all").className = "active";
+        $("audio").play();
+    }
+    function play1() {
+        $("pre").style.display = "none";
+        $("all").className = "active";
+    }
+    function init() {
+        console.log("init")
+        var site = 10;
+        var myLazyLoad = new LazyLoad({
+            elements_selector: ".lazy",
+            callback_load: function (param) {
+                if (--site == 0) {
+                    $("loading").style.display = "none";
+                    $("pre").style.display = "block";
+                    // $("all").className = "active";
+                    // play();
+                }
+            }
+        });
+    }
+
+    // document.getElementsByTagName("body")[0].addEventListener("click", function () {
+    //     play()
+    // })
+</script>
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?49e65df45aa3f76ec0de456ccad70aef";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
 </html>
